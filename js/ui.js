@@ -5,6 +5,7 @@ class UI {
     this.notifications = [];
     this.titleAnimTimer = 0;
     this.glitchTimer = 0;
+    this.isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
   }
 
   addNotification(text, color = '#ffffff', duration = 2000) {
@@ -145,26 +146,28 @@ class UI {
     ctx.fillText('⬥ HORROR EDITION ⬥', w / 2, titleY + 40);
     ctx.shadowBlur = 0;
 
-    ctx.font = '14px monospace';
-    ctx.fillStyle = '#666';
+    ctx.font = '18px monospace';
+    ctx.fillStyle = '#888';
     const blink = Math.sin(this.titleAnimTimer * 0.004) > 0;
     if (blink) {
-      ctx.fillText('Press ENTER to start', w / 2, h * 0.55);
+      ctx.fillText('Toque ou ENTER para começar', w / 2, h * 0.55);
     }
 
     ctx.font = '12px monospace';
-    ctx.fillStyle = '#444';
-    ctx.fillText('WASD / Arrow Keys to move', w / 2, h * 0.65);
-    ctx.fillText('ESC to pause', w / 2, h * 0.68);
+    ctx.fillStyle = '#555';
+    ctx.fillText('WASD / Setas para mover', w / 2, h * 0.64);
+    ctx.fillText('ESC para pausar', w / 2, h * 0.67);
 
-    ctx.fillStyle = '#ff004488';
-    ctx.fillText('Survive. Collect. Escape.', w / 2, h * 0.8);
+    ctx.fillStyle = '#ff004466';
+    ctx.font = '13px monospace';
+    ctx.fillText('Sobrevive. Colecta. Escapa.', w / 2, h * 0.76);
 
-    ctx.font = '12px monospace';
-    ctx.fillStyle = CONFIG.COLORS.NEON_PINK + '88';
-    ctx.fillText('By Helena Afonso', w / 2, h * 0.88);
-
-    ctx.restore();
+    ctx.font = '20px monospace';
+    ctx.fillStyle = CONFIG.COLORS.NEON_PINK;
+    ctx.shadowColor = CONFIG.COLORS.NEON_PINK;
+    ctx.shadowBlur = 15;
+    ctx.fillText('By Helena Afonso', w / 2, h * 0.87);
+    ctx.shadowBlur = 0;
   }
 
   drawPauseScreen() {
@@ -215,7 +218,7 @@ class UI {
     const blink = Math.sin(Date.now() * 0.004) > 0;
     if (blink) {
       ctx.fillStyle = '#666';
-      ctx.fillText('Press ENTER to retry', w / 2, h * 0.7);
+      ctx.fillText('Toque ou ENTER para tentar novamente', w / 2, h * 0.7);
     }
   }
 
@@ -270,7 +273,7 @@ class UI {
     ctx.fillStyle = '#888';
     const blink = Math.sin(Date.now() * 0.004) > 0;
     if (blink) {
-      ctx.fillText('Press ENTER to play again', w / 2, h * 0.65);
+      ctx.fillText('Toque ou ENTER para jogar novamente', w / 2, h * 0.65);
     }
   }
 

@@ -6,6 +6,7 @@ class InputManager {
     this.touchStartX = 0;
     this.touchStartY = 0;
     this.isTouching = false;
+    this.touchMoved = false;
     this.keys = {};
     this.pauseRequested = false;
     this.enterPressed = false;
@@ -58,10 +59,12 @@ class InputManager {
       this.touchStartX = touch.clientX;
       this.touchStartY = touch.clientY;
       this.isTouching = true;
+      this.touchMoved = false;
     }, { passive: false });
 
     this.canvas.addEventListener('touchmove', (e) => {
       e.preventDefault();
+      this.touchMoved = true;
     }, { passive: false });
 
     this.canvas.addEventListener('touchend', (e) => {
@@ -79,6 +82,8 @@ class InputManager {
         } else {
           this.nextDirection = dy > 0 ? { ...CONFIG.DIRECTIONS.DOWN } : { ...CONFIG.DIRECTIONS.UP };
         }
+      } else if (!this.touchMoved) {
+        this.enterPressed = true;
       }
       this.isTouching = false;
     }, { passive: false });
