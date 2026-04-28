@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>PacGirl - Horror Edition</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="game-canvas" width="600" height="600"></canvas>
+  </div>
+
+  <script>
+    if (!CanvasRenderingContext2D.prototype.roundRect) {
+      CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+        if (typeof r === 'number') r = [r, r, r, r];
+        else if (typeof r === 'undefined') r = [0, 0, 0, 0];
+        this.moveTo(x + r[0], y);
+        this.lineTo(x + w - r[1], y);
+        this.arcTo(x + w, y, x + w, y + r[1], r[1]);
+        this.lineTo(x + w, y + h - r[2]);
+        this.arcTo(x + w, y + h, x + w - r[2], y + h, r[2]);
+        this.lineTo(x + r[3], y + h);
+        this.arcTo(x, y + h, x, y + h - r[3], r[3]);
+        this.lineTo(x, y + r[0]);
+        this.arcTo(x, y, x + r[0], y, r[0]);
+        this.closePath();
+        return this;
+      };
+    }
+  </script>
+  <script src="js/config.js"></script>
+  <script src="js/levels.js"></script>
+  <script src="js/input.js"></script>
+  <script src="js/maze.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/enemy.js"></script>
+  <script src="js/powerups.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
